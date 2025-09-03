@@ -90,11 +90,11 @@
 <body>
   <nav class="main-navbar">
     <ul>
-      <li><a href="/little-wok-box/index.html">Home</a></li>
-      <li><a href="/little-wok-box/menu.html">Menu</a></li>
-      <li><a href="/little-wok-box/offers.html">Offers</a></li>
-      <li><a href="/little-wok-box/account.html" class="active">Account</a></li>
-      <li><a href="/little-wok-box/login.html" id="logoutBtn">Logout</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="offers.html">Offers</a></li>
+      <li><a href="account.html" class="active">Account</a></li>
+      <li><a href="login.html" id="logoutBtn">Logout</a></li>
     </ul>
   </nav>
   <div class="account-wrapper">
@@ -119,7 +119,6 @@
         </div>
         <div style="font-size:0.95rem;color:#222;margin-top:0.5rem;">Use this code to get ₹50 off on your next order!</div>
     </div>
-    <button type="button" id="makeAdminBtn" style="background:#fff;color:#DC0E2A;border:1.5px solid #DC0E2A;margin-bottom:1rem;font-size:1rem;font-weight:600;border-radius:0.7rem;padding:0.7rem 1.2rem;cursor:pointer;display:block;width:100%;">Make Me Admin</button>
   <!-- Profile completion modal removed for migration to register page -->
     
   </div>
@@ -153,27 +152,6 @@
         });
       }
     });
-  </script>
-
-  <script type="module">
-    import { setDoc, doc, getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-    import { auth } from "./js/firebase-config.js";
-    document.getElementById('makeAdminBtn').onclick = async function() {
-      if (!auth.currentUser) {
-        alert("Please log in first.");
-        return;
-      }
-      const db = getFirestore();
-      const user = auth.currentUser;
-      const adminData = {
-        uid: user.uid,
-        email: user.email,
-        role: "admin",
-        createdAt: new Date().toISOString()
-      };
-      await setDoc(doc(db, "users", user.uid), adminData, { merge: true });
-      alert("Your account is now set as admin in Firestore.");
-    };
   </script>
 
   <script src="profile-modal.js"></script>
