@@ -1,0 +1,72 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Little Wok Box 🍜</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+  <nav>
+    <h1>Little Wok Box</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="offers.html">Offers</a></li>
+      <li><a href="admin/dashboard.html">Admin Dashboard</a></li>
+      <li class="nav-logged-out"><a href="register.html">Register</a></li>
+      <li class="nav-logged-out"><a href="login.html">Login</a></li>
+      <li class="nav-logged-in"><a href="account.html">Profile</a></li>
+      <li class="nav-logged-in"><a href="#" id="logoutBtn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h2>Indo-Chinese, Tibetan & Momos Delights</h2>
+      <p>Experience the fusion of flavors, tradition, and fun. Earn rewards as you feast!</p>
+      <a href="menu.html" class="hero-btn">Explore Menu</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="menu" class="menu-section">
+      <h2>Our Specialties</h2>
+      <div class="menu-categories">
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Indo-Chinese" />
+          <h3>Indo-Chinese</h3>
+          <p>From spicy Hakka noodles to crispy Manchurian, savor the best of Indo-Chinese cuisine.</p>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Tibetan" />
+          <h3>Tibetan</h3>
+          <p>Warm up with hearty thukpa, tingmo, and authentic Tibetan flavors straight from the hills.</p>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80" alt="Momos" />
+          <h3>Momos</h3>
+          <p>Steamed, fried, or tandoori—our momos are legendary. Try every variety!</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="offers" class="offers-section">
+      <h2>Current Offers</h2>
+      <ul class="offers-list">
+        <li><strong>Welcome Bonus:</strong> Register & get 100 coins instantly!</li>
+        <li><strong>Momo Mondays:</strong> Buy 1 get 1 free on all momos every Monday.</li>
+        <li><strong>Refer & Earn:</strong> Invite friends and earn extra rewards.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Little Wok Box. All rights reserved.</p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

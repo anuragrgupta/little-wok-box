@@ -1,0 +1,50 @@
+<!-- /public/admin/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard - Little Wok Box</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="admin-nav">
+    <h2>Welcome, <span id="admin-name">Admin</span></h2>
+    <ul>
+      <li><a href="users.html">Users</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="offers.html">Offers</a></li>
+      <li><a href="blogs.html">Blogs</a></li>
+      <li><a href="../index.html">Back to Site</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-main">
+    <section class="dashboard-cards">
+      <div class="card">
+        <h3>Users</h3>
+        <p>View and manage all registered users.</p>
+        <a href="users.html" class="card-link">Go to Users</a>
+      </div>
+      <div class="card">
+        <h3>Menu</h3>
+        <p>Add or edit food items and categories.</p>
+        <a href="menu.html" class="card-link">Go to Menu</a>
+      </div>
+      <div class="card">
+        <h3>Offers</h3>
+        <p>Launch new promotions and offers.</p>
+        <a href="offers.html" class="card-link">Go to Offers</a>
+      </div>
+      <div class="card">
+        <h3>Blogs</h3>
+        <p>Create or update blog content.</p>
+        <a href="blogs.html" class="card-link">Go to Blogs</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="dashboard.js"></script>
+  <script type="module" src="../js/firebase-config.js"></script>
+<script type="module" src="dashboard.js"></script>
+</body>
+</html>

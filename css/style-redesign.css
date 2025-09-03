@@ -1,0 +1,8 @@
+/* style-redesign.css: Minimal placeholder to prevent 404 error */
+body {
+  background: #f7f7fa;
+}
+.account-wrapper {
+  box-shadow: 0 2px 16px rgba(220,14,42,0.08);
+  border-radius: 1.2rem;
+}

@@ -1,0 +1,101 @@
+<!-- /public/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/style-redesign.css">
+  <style>
+    body {
+      background: #f7f7fa;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .login-wrapper {
+      max-width: 400px;
+      margin: 4rem auto;
+      background: #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 16px rgba(220,14,42,0.08);
+      padding: 2.5rem 2rem 2rem 2rem;
+    }
+    .login-title {
+      text-align: center;
+      color: #DC0E2A;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .login-form input {
+      padding: 0.7rem 1rem;
+      border-radius: 0.7rem;
+      border: 1px solid #eee;
+      font-size: 1rem;
+      background: #f7f7fa;
+      transition: border 0.2s;
+    }
+    .login-form input:focus {
+      border: 1.5px solid #DC0E2A;
+      outline: none;
+    }
+    .login-form button {
+      background: #DC0E2A;
+      color: #fff;
+      border: none;
+      border-radius: 0.7rem;
+      padding: 0.9rem 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+    .login-form button:hover {
+      background: #a00;
+    }
+    .login-link {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.98rem;
+    }
+    .login-link a {
+      color: #DC0E2A;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <nav class="main-navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="offers.html">Offers</a></li>
+      <li><a href="account.html">Account</a></li>
+      <li><a href="login.html" class="active">Login</a></li>
+    </ul>
+  </nav>
+  <div class="login-wrapper">
+    <div class="login-title">Sign In to Little Wok Box</div>
+    <form class="login-form" onsubmit="loginUser(event)">
+      <input type="email" id="loginEmail" placeholder="Email Address" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <button type="button" id="forgotPasswordBtn" style="background:#fff;color:#DC0E2A;border:1.5px solid #DC0E2A;margin-top:0.5rem;font-size:1rem;font-weight:500;border-radius:0.7rem;padding:0.7rem 0;cursor:pointer;">Forgot Password?</button>
+      <div class="login-link">Don't have an account? <a href="register.html">Register here</a></div>
+    </form>
+  </div>
+  <footer class="main-footer">
+    <p>&copy; 2025 Little Wok Box. All rights reserved.</p>
+  </footer>
+
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

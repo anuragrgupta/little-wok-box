@@ -1,0 +1,380 @@
+/* Modal overlay for edit wok builder item */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 2rem 2.5rem;
+  min-width: 320px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #DC0E2A;
+  cursor: pointer;
+}
+/* Main Navbar and Footer for Admin Pages */
+.main-navbar {
+  width: 100vw;
+  background: #DC0E2A;
+  color: #fff;
+  padding: 0.7rem 0;
+  margin-bottom: 1.2rem;
+}
+.main-navbar ul {
+  display: flex;
+  gap: 1.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 2vw;
+}
+.main-navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.main-navbar ul li a.active,
+.main-navbar ul li a:hover {
+  color: #ffe0e6;
+  text-decoration: underline;
+}
+.main-footer {
+  width: 100vw;
+  background: #DC0E2A;
+  color: #fff;
+  text-align: center;
+  padding: 1.2rem 0 1rem 0;
+  font-size: 0.98rem;
+  border-top: 1px solid #eee;
+  margin-top: 2rem;
+}
+/* Menu Items Grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+.menu-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(220,14,42,0.07);
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  font-size: 0.98rem;
+  position: relative;
+}
+.menu-card img {
+  width: 100%;
+  max-width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 0.7rem;
+  margin-bottom: 0.7rem;
+  background: #eee;
+}
+.menu-card .menu-title {
+  font-weight: bold;
+  color: #DC0E2A;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+.menu-card .menu-type {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+.menu-card .menu-category {
+  font-size: 0.93rem;
+  color: #888;
+  margin-bottom: 0.3rem;
+}
+.menu-card .menu-desc {
+  font-size: 0.93rem;
+  color: #222;
+  margin-bottom: 0.3rem;
+}
+.menu-card .menu-price {
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 0.3rem;
+}
+.menu-card .menu-status {
+  font-size: 0.92rem;
+  color: #DC0E2A;
+  margin-bottom: 0.3rem;
+}
+.menu-card .menu-tags {
+  margin-bottom: 0.3rem;
+}
+.menu-card .tag-chip {
+  display: inline-block;
+  background: #f7f7fa;
+  color: #DC0E2A;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.85rem;
+  margin-right: 0.3rem;
+}
+.menu-card .menu-actions {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.menu-card .edit-btn, .menu-card .delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #DC0E2A;
+  transition: color 0.2s;
+}
+.menu-card .edit-btn:hover, .menu-card .delete-btn:hover {
+  color: #a00;
+}
+/* Wok Builder Grid Section Titles */
+.wok-grid-section {
+  margin-bottom: 2rem;
+}
+.wok-section-title {
+  font-size: 1.15rem;
+  color: #DC0E2A;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  margin-top: 0.5rem;
+}
+/* Wok Builder Items Grid */
+.wok-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+.wok-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(220,14,42,0.07);
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  font-size: 0.98rem;
+  position: relative;
+}
+.wok-card .wok-title {
+  font-weight: bold;
+  color: #DC0E2A;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+.wok-card .wok-type {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+.wok-card .wok-category {
+  font-size: 0.93rem;
+  color: #888;
+  margin-bottom: 0.3rem;
+}
+.wok-card .wok-desc {
+  font-size: 0.93rem;
+  color: #222;
+  margin-bottom: 0.3rem;
+}
+.wok-card .wok-price {
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 0.3rem;
+}
+.wok-card .wok-status {
+  font-size: 0.92rem;
+  color: #DC0E2A;
+  margin-bottom: 0.3rem;
+}
+.wok-card .wok-actions {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.wok-card .edit-btn, .wok-card .pause-btn, .wok-card .delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #DC0E2A;
+  transition: color 0.2s;
+}
+.wok-card .edit-btn:hover, .wok-card .pause-btn:hover, .wok-card .delete-btn:hover {
+  color: #a00;
+}
+/* Redesigned admin menu page for full-width cards and better layout */
+body {
+  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #f7f7fa;
+}
+/* Admin wrapper and content for full-width layout */
+.admin-wrapper {
+  width: 100vw;
+  min-height: 100vh;
+}
+.admin-content {
+  width: 100vw;
+  padding: 2rem 2.5vw;
+  background: #f7f7fa;
+  box-sizing: border-box;
+}
+.form-section, .wok-builder-section, .menu-list-section {
+  margin-bottom: 2.5rem;
+}
+.form-card {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 24px rgba(220,14,42,0.07);
+  padding: 2rem 2vw;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+.form-card h2 {
+  color: #DC0E2A;
+  margin-bottom: 1.2rem;
+  font-size: 1.5rem;
+}
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+.form-row input,
+.form-row select {
+  flex: 1 1 220px;
+  padding: 0.7rem 1rem;
+  border-radius: 0.7rem;
+  border: 1px solid #eee;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.form-row label {
+  font-size: 1rem;
+  color: #222;
+  margin-right: 0.7rem;
+}
+.add-btn {
+  background: #DC0E2A;
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+.add-btn:hover {
+  background: #a00;
+}
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.2rem;
+  background: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(220,14,42,0.07);
+}
+.menu-table th, .menu-table td {
+  padding: 1rem 0.7rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 1rem;
+}
+.menu-table th {
+  background: #f7f7fa;
+  color: #DC0E2A;
+  font-weight: 600;
+}
+.menu-table tr:last-child td {
+  border-bottom: none;
+}
+.edit-btn, .pause-btn, .delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  color: #DC0E2A;
+  transition: color 0.2s;
+}
+.edit-btn:hover, .pause-btn:hover, .delete-btn:hover {
+  color: #a00;
+}
+@media (max-width: 900px) {
+  .form-card {
+    max-width: 100vw;
+    padding: 1rem 1vw;
+  }
+  .admin-sidebar {
+    width: 180px;
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .admin-wrapper {
+    flex-direction: column;
+  }
+  .admin-sidebar {
+    width: 100vw;
+    min-height: auto;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 0.5rem;
+  }
+  .admin-content {
+    padding: 1rem 1vw;
+  }
+  .form-card {
+    padding: 1rem 0.5vw;
+  }
+  .menu-table th, .menu-table td {
+    padding: 0.7rem 0.3rem;
+    font-size: 0.95rem;
+  }
+}

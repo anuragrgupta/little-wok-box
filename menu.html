@@ -1,0 +1,102 @@
+<!-- /public/menu.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wok Wonders | Explore Menu</title>
+<link rel="stylesheet" href="css/styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+</head>
+<body>
+  <nav>
+    <h1>Little Wok Box</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="offers.html">Offers</a></li>
+      <li class="nav-logged-out"><a href="register.html">Register</a></li>
+      <li class="nav-logged-out"><a href="login.html">Login</a></li>
+      <li class="nav-logged-in"><a href="account.html">Profile</a></li>
+      <li class="nav-logged-in"><a href="#" id="logoutBtn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <main class="menu-main">
+    <!-- 🔍 Search Section -->
+    <section class="search-section">
+      <div class="search-container">
+        <input type="text" id="menuSearch" placeholder="Search for your favorite dishes..." class="search-input">
+        <button class="search-btn">🔍</button>
+      </div>
+    </section>
+
+    <!-- 🍱 Menu Filters -->
+    <section class="menu-section">
+      <!-- Veg/Egg/Non-Veg Toggles -->
+      <div class="toggle-switches">
+        <label class="toggle-label">
+          <input type="checkbox" id="vegToggle" checked>
+          <span class="slider"></span> 🌱 Veg
+        </label>
+        <label class="toggle-label">
+          <input type="checkbox" id="eggToggle" checked>
+          <span class="slider"></span> 🥚 Egg
+        </label>
+        <label class="toggle-label">
+          <input type="checkbox" id="nonVegToggle" checked>
+          <span class="slider"></span> 🍗 Non-Veg
+        </label>
+      </div>
+
+      <!-- 🍜 Category Buttons -->
+      <div class="categories">
+        <button class="category-btn active" data-category="all">All Items</button>
+        <button class="category-btn" data-category="main-course">Main Course</button>
+        <button class="category-btn" data-category="tibetan">Tibetan Secrets</button>
+        <button class="category-btn" data-category="soups">Soups</button>
+        <button class="category-btn" data-category="beverages">Beverages</button>
+        <button class="category-btn" data-category="momos">Momos Corner</button>
+        <button class="category-btn" data-category="starters">Starters</button>
+        <button class="category-btn" data-category="desserts">Desserts</button>
+        <button class="category-btn" data-category="wok">
+          <a href="make-your-own-wok.html" style="color: inherit; text-decoration: none;">Make Your Own Wok</a>
+        </button>
+      </div>
+
+      <!-- 🧪 Advanced Filters -->
+      <div class="filters">
+        <label><input type="checkbox" class="tagFilter" value="price" data-filter="price"> ₹ Price</label>
+        <label><input type="checkbox" class="tagFilter" value="for-one" data-filter="for-one"> 👤 For One</label>
+        <label><input type="checkbox" class="tagFilter" value="for-two" data-filter="for-two"> 👨‍👩‍👧‍👦 For Two</label>
+        <label><input type="checkbox" class="tagFilter" value="fried" data-filter="fried"> 🥟 Fried</label>
+        <label><input type="checkbox" class="tagFilter" value="quick" data-filter="quick"> ⏱️ Quick</label>
+        <label><input type="checkbox" class="tagFilter" value="time-taking" data-filter="time-taking"> 🕒 Time Taking</label>
+        <label><input type="checkbox" class="tagFilter" value="spicy" data-filter="spicy" id="spicy"> 🌶️ Spicy</label>
+        <label><input type="checkbox" class="tagFilter" value="normal-spicy" data-filter="normal-spicy"> 🌿 Normal Spicy</label>
+      </div>
+
+      <!-- 🧩 Menu Items Grid (Dynamic) -->
+      <div class="menu-grid" id="menuGrid">
+        <!-- Populated by Firebase JS -->
+      </div>
+    </section>
+
+    <!-- 🎁 Rewards CTA -->
+    <section class="rewards-cta">
+      <a href="login.html" class="btn">Join the Rewards Program</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Little Wok Box. All rights reserved.</p>
+  </footer>
+
+  <script src="auth.js"></script>
+  <script type="module" src="js/menu.js"></script>
+  
+</body>
+</html>
+

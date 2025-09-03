@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Make Your Own Box | Little Wok Box</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { font-family: 'Inter', Arial, sans-serif; background: #faf9f6; margin: 0; }
+    
+    nav h1 {
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      letter-spacing: 1px;
+    }
+    .navbar-links {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .navbar-links a {
+      color: #DC0E2A;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .navbar-links a:hover, .navbar-links a.active {
+      color: #a00;
+      text-decoration: underline;
+    }
+    footer {
+      background: #DC0E2A;
+      color: #ffffff;
+      text-align: center;
+      padding: 1.2rem 0 1rem 0;
+      font-size: 0.98rem;
+      border-top: 1px solid #eee;
+      margin-top: 2rem;
+    }
+    .wok-main { max-width: 480px; margin: 2rem auto; background: #fff; border-radius: 1.2rem; box-shadow: 0 2px 24px rgba(220,14,42,0.07); padding: 2rem 1.2rem; }
+    h1 { text-align: center; color: #DC0E2A; margin-bottom: 1.2rem; }
+    .wok-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .step-indicator {
+      display: inline-block;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: #eee;
+      color: #888;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-align: center;
+      line-height: 2rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .step-indicator.active {
+      background: #DC0E2A;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(220,14,42,0.12);
+    }
+    .step-arrow {
+      color: #DC0E2A;
+      font-weight: bold;
+    }
+    .step-title { font-size: 1.2rem; margin-bottom: 1rem; color: #222; }
+    .options-list { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.2rem; }
+    .options-list label { background: #f7f7f7; border-radius: 0.7rem; padding: 0.7rem 1rem; cursor: pointer; border: 2px solid transparent; transition: border 0.2s; display: flex; align-items: center; gap: 0.7rem; }
+    .options-list input:checked + span { font-weight: bold; color: #DC0E2A; }
+    .options-list input:disabled + span { color: #aaa; }
+    .nav-btn { width: 100%; padding: 0.7rem; border-radius: 0.7rem; border: none; background: #DC0E2A; color: #fff; font-size: 1.1rem; margin-top: 1rem; cursor: pointer; transition: opacity 0.2s; }
+    .nav-btn.inactive { opacity: 0.5; pointer-events: none; cursor: not-allowed; }
+    .order-summary { background: #f7f7f7; border-radius: 0.7rem; padding: 1rem; margin-top: 2rem; }
+    .order-summary h3 { margin-top: 0; color: #DC0E2A; }
+    .total-price { font-weight: bold; color: #222; margin-top: 0.7rem; }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.35);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      max-width: 90vw;
+      min-width: 300px;
+      box-shadow: 0 4px 32px rgba(220,14,42,0.15);
+      text-align: center;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 0.7rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #DC0E2A;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .wok-main { padding: 1rem 0.3rem; }
+      .options-list label { padding: 0.7rem 0.5rem; }
+      nav { flex-direction: column; gap: 0.5rem; }
+      nav ul { margin-top: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar (matches index.html style) -->
+  <nav>
+    <h1>Little Wok Box</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="offers.html">Offers</a></li>
+      <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+      <li class="nav-logged-out"><a href="register.html">Register</a></li>
+      <li class="nav-logged-out"><a href="login.html">Login</a></li>
+      <li class="nav-logged-in"><a href="account.html">Profile</a></li>
+      <li class="nav-logged-in"><a href="#" id="logoutBtn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <main class="wok-main">
+    <h1>Make Your Own Box</h1>
+    <div class="wok-progress">
+      <div id="stepIndicator1" class="step-indicator active">1</div>
+      <div class="step-arrow">→</div>
+      <div id="stepIndicator2" class="step-indicator">2</div>
+      <div class="step-arrow">→</div>
+      <div id="stepIndicator3" class="step-indicator">3</div>
+    </div>
+
+    <!-- STEP 1: BASE -->
+    <section id="step1" class="wok-step active">
+      <div class="step-title">1. Choose Your Base</div>
+    <div class="options-list" id="baseOptions"></div>
+      <button id="toStep2" class="nav-btn inactive">Next →</button>
+    </section>
+
+    <!-- STEP 2: GRAVY & TOPPING -->
+    <section id="step2" class="wok-step">
+      <div class="step-title">2. Choose Gravy & Topping</div>
+    <div class="options-list" id="gravyOptions"></div>
+    <div class="options-list" id="toppingOptions"></div>
+      <button id="toStep3" class="nav-btn inactive">Next →</button>
+      <button id="backTo1" class="nav-btn" style="background:#aaa; color:#fff; margin-top:0.5rem;">← Back</button>
+    </section>
+
+    <!-- STEP 3: EXTRAS & ADD-ONS -->
+    <section id="step3" class="wok-step">
+      <div class="step-title">3. Make it interesting!</div>
+    <div class="options-list" id="extraOptions"></div>
+      <div class="options-list">
+        <strong>Don’t want your regular steam momos?</strong>
+        <label><input type="checkbox" name="fry-momos"><span>Fry your momos (+₹10)</span></label>
+        <label><input type="checkbox" name="kurkure-momos"><span>Make them Kurkure (+₹20)</span></label>
+      </div>
+      <button id="backTo2" class="nav-btn" style="background:#aaa; color:#fff; margin-top:0.5rem;">← Back</button>
+      <button id="finishBtn" class="nav-btn">Finish & Show Summary</button>
+    </section>
+
+    <!-- Order Summary -->
+    <section class="order-summary" id="summarySection" style="display:none;">
+      <h3>Your Box Summary</h3>
+      <div id="orderDetails"></div>
+      <button id="startOverBtn" class="nav-btn" style="background:#DC0E2A; margin-top:1rem;">Start Over</button>
+    </section>
+
+    <!-- Modal Popup -->
+    <div class="modal" id="summaryModal">
+      <div class="modal-content">
+        <button class="modal-close" id="closeModalBtn" aria-label="Close">&times;</button>
+        <h3>Your Box Summary</h3>
+        <div id="modalOrderDetails"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer (matches index.html style) -->
+  <footer>
+    <p>&copy; 2024 Little Wok Box. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Step navigation and logic
+    const steps = [
+      document.getElementById('step1'),
+      document.getElementById('step2'),
+      document.getElementById('step3')
+    ];
+    let currentStep = 0;
+
+    function focusFirstInput(stepIdx) {
+      const stepSection = steps[stepIdx];
+      const firstInput = stepSection.querySelector('input:not([disabled])');
+      if (firstInput) {
+        firstInput.focus();
+        stepSection.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
+    function showStep(idx) {
+      steps.forEach((step, i) => {
+        step.classList.toggle('active', i === idx);
+        // Hide all inputs in inactive steps
+        step.querySelectorAll('input').forEach(input => {
+          input.disabled = i !== idx;
+          input.parentElement.style.opacity = i === idx ? '1' : '0.5';
+          if (i !== idx) input.checked = false;
+        });
+      });
+      document.getElementById('summarySection').style.display = 'none';
+      currentStep = idx;
+      updateNavBtns();
+      [1,2,3].forEach(i => {
+        document.getElementById('stepIndicator'+i).classList.toggle('active', idx === i-1);
+      });
+      setTimeout(() => focusFirstInput(idx), 100); // ensure DOM is ready
+    }
+
+    // Step 1 logic
+    const toStep2 = document.getElementById('toStep2');
+    function updateStep1Btn() {
+      const baseSelected = document.querySelector('input[name="base"]:checked');
+      toStep2.disabled = !baseSelected;
+      toStep2.classList.toggle('inactive', !baseSelected);
+      // Disable all step 2 inputs if no base selected
+      document.querySelectorAll('#step2 input').forEach(input => {
+        input.disabled = !baseSelected;
+        input.parentElement.style.opacity = baseSelected ? '1' : '0.5';
+        if (!baseSelected) input.checked = false;
+      });
+      // Disable all step 3 inputs if no base selected
+      document.querySelectorAll('#step3 input').forEach(input => {
+        input.disabled = !baseSelected;
+        input.parentElement.style.opacity = baseSelected ? '1' : '0.5';
+        if (!baseSelected) input.checked = false;
+      });
+    }
+    document.addEventListener('change', function(e) {
+      if (e.target.name === 'base') updateStep1Btn();
+    });
+    toStep2.addEventListener('click', () => showStep(1));
+
+    // Step 2 logic
+    const toStep3 = document.getElementById('toStep3');
+    const backTo1 = document.getElementById('backTo1');
+    function updateStep2Btn() {
+      const baseSelected = document.querySelector('input[name="base"]:checked');
+      const gravySelected = document.querySelector('input[name="gravy"]:checked');
+      const toppingSelected = document.querySelector('input[name="topping"]:checked');
+      toStep3.disabled = !(gravySelected && toppingSelected);
+      toStep3.classList.toggle('inactive', !(gravySelected && toppingSelected));
+      // Enable/disable topping inputs based on gravy selection
+      document.querySelectorAll('input[name="topping"]').forEach(input => {
+        input.disabled = !gravySelected;
+        input.parentElement.style.opacity = gravySelected ? '1' : '0.5';
+        if (!gravySelected) input.checked = false;
+      });
+      // Disable all step 3 inputs if base or gravy/topping not selected
+      const step3Enabled = baseSelected && gravySelected && toppingSelected;
+      document.querySelectorAll('#step3 input').forEach(input => {
+        input.disabled = !step3Enabled;
+        input.parentElement.style.opacity = step3Enabled ? '1' : '0.5';
+        if (!step3Enabled) input.checked = false;
+      });
+    }
+    document.addEventListener('change', function(e) {
+      if (e.target.name === 'gravy' || e.target.name === 'topping') updateStep2Btn();
+    });
+    toStep3.addEventListener('click', () => showStep(2));
+    backTo1.addEventListener('click', () => showStep(0));
+
+    // Step 3 logic
+    const fryCheckbox = document.querySelector('input[name="fry-momos"]');
+    const kurkureCheckbox = document.querySelector('input[name="kurkure-momos"]');
+    const backTo2 = document.getElementById('backTo2');
+    const finishBtn = document.getElementById('finishBtn');
+    function updateMomoCustomization() {
+      // Find all momo options dynamically
+      const momoValues = Array.from(document.querySelectorAll('input[name="extra"]')).map(i => i.value).filter(v => v.toLowerCase().includes('momo'));
+      const selectedExtra = document.querySelector('input[name="extra"]:checked');
+      const isMomoSelected = selectedExtra && momoValues.includes(selectedExtra.value);
+      fryCheckbox.disabled = !isMomoSelected;
+      kurkureCheckbox.disabled = !isMomoSelected;
+      fryCheckbox.parentElement.style.opacity = isMomoSelected ? '1' : '0.5';
+      kurkureCheckbox.parentElement.style.opacity = isMomoSelected ? '1' : '0.5';
+      if (!isMomoSelected) {
+        fryCheckbox.checked = false;
+        kurkureCheckbox.checked = false;
+      }
+    }
+    document.addEventListener('change', function(e) {
+      if (e.target.name === 'extra') updateMomoCustomization();
+      if (e.target.name === 'fry-momos' && fryCheckbox.checked) kurkureCheckbox.checked = false;
+      if (e.target.name === 'kurkure-momos' && kurkureCheckbox.checked) fryCheckbox.checked = false;
+    });
+    backTo2.addEventListener('click', () => showStep(1));
+
+    // Navigation button state
+    function updateNavBtns() {
+      updateStep1Btn();
+      updateStep2Btn();
+    }
+    // Initial disable on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      updateStep1Btn();
+      updateStep2Btn();
+    });
+
+    // Summary logic
+    finishBtn.addEventListener('click', () => {
+      steps.forEach(step => step.classList.remove('active'));
+      document.getElementById('summarySection').style.display = '';
+      updateSummary();
+      showModalSummary();
+    });
+    document.getElementById('startOverBtn').addEventListener('click', () => {
+      document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => input.checked = false);
+      showStep(0);
+      updateSummary();
+      updateMomoCustomization();
+    });
+
+    function updateSummary() {
+      const selectedBase = document.querySelector('input[name="base"]:checked');
+      const selectedGravy = document.querySelector('input[name="gravy"]:checked');
+      const selectedTopping = document.querySelector('input[name="topping"]:checked');
+      const selectedExtra = document.querySelector('input[name="extra"]:checked');
+      const basePrice = selectedBase ? parseInt(selectedBase.getAttribute('data-price')) : 0;
+      const gravyPrice = selectedGravy ? parseInt(selectedGravy.getAttribute('data-price')) : 0;
+      const toppingPrice = selectedTopping ? parseInt(selectedTopping.getAttribute('data-price')) : 0;
+      const extraPrice = selectedExtra ? parseInt(selectedExtra.getAttribute('data-price')) : 0;
+      let totalPrice = basePrice + gravyPrice + toppingPrice + extraPrice;
+      let momoUpgradeText = '';
+      if (fryCheckbox && fryCheckbox.checked) {
+        momoUpgradeText = 'Momos: Fried (+₹10)';
+        totalPrice += 10;
+      } else if (kurkureCheckbox && kurkureCheckbox.checked) {
+        momoUpgradeText = 'Momos: Kurkure (+₹20)';
+        totalPrice += 20;
+      }
+      let summaryHtml = `
+        <ul>
+          <li>Base: ${selectedBase ? selectedBase.value : ''} ${selectedBase ? '(₹'+selectedBase.getAttribute('data-price')+')' : ''}</li>
+          <li>Gravy: ${selectedGravy ? selectedGravy.value : ''} ${selectedGravy ? '(₹'+selectedGravy.getAttribute('data-price')+')' : ''}</li>
+          <li>Topping: ${selectedTopping ? selectedTopping.value : ''} ${selectedTopping ? '(₹'+selectedTopping.getAttribute('data-price')+')' : ''}</li>
+          <li>Extra: ${selectedExtra ? selectedExtra.value : ''} ${selectedExtra ? '(₹'+selectedExtra.getAttribute('data-price')+')' : ''}</li>
+          ${momoUpgradeText ? `<li>${momoUpgradeText}</li>` : ''}
+        </ul>
+        <div class="total-price">Total: ₹${totalPrice}</div>
+      `;
+      document.getElementById('orderDetails').innerHTML = summaryHtml;
+      document.getElementById('modalOrderDetails').innerHTML = summaryHtml;
+    }
+    document.addEventListener('change', function(e) {
+      if (["base","gravy","topping","extra","fry-momos","kurkure-momos"].includes(e.target.name)) updateSummary();
+    });
+    updateSummary();
+
+    // Modal logic
+    const summaryModal = document.getElementById('summaryModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    function showModalSummary() {
+      summaryModal.classList.add('active');
+    }
+    closeModalBtn.addEventListener('click', () => {
+      summaryModal.classList.remove('active');
+    });
+    // Close modal on outside click
+    summaryModal.addEventListener('click', (e) => {
+      if (e.target === summaryModal) summaryModal.classList.remove('active');
+    });
+    // ESC key closes modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") summaryModal.classList.remove('active');
+    });
+  </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDiVg0mKcDmBDPLbmNbxuNtFgJ1MgsjLyw",
+  authDomain: "little-wok-box.firebaseapp.com",
+  projectId: "little-wok-box",
+  storageBucket: "little-wok-box.appspot.com",
+  messagingSenderId: "118275337110",
+  appId: "1:118275337110:web:9dbaf4dc96ee2529bb8bb7"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadWokBuilderOptions() {
+  const querySnapshot = await getDocs(collection(db, "wokBuilderItems"));
+  const items = [];
+  querySnapshot.forEach(doc => items.push(doc.data()));
+
+  // Step 1: Base
+  const baseOptionsDiv = document.getElementById("baseOptions");
+  baseOptionsDiv.innerHTML = "";
+  const noodleBases = items.filter(i => i.type === "base" && i.category === "noodles");
+  const riceBases = items.filter(i => i.type === "base" && i.category === "rice");
+  if (noodleBases.length) baseOptionsDiv.innerHTML += `<strong>Noodle Base</strong>`;
+  noodleBases.forEach(i => {
+    baseOptionsDiv.innerHTML += `<label><input type="radio" name="base" value="${i.name}" data-price="${i.price}"><span>${i.name} (+₹${i.price})</span></label>`;
+  });
+  if (riceBases.length) baseOptionsDiv.innerHTML += `<strong>Rice Base</strong>`;
+  riceBases.forEach(i => {
+    baseOptionsDiv.innerHTML += `<label><input type="radio" name="base" value="${i.name}" data-price="${i.price}"><span>${i.name} (+₹${i.price})</span></label>`;
+  });
+
+  // Step 2: Gravy
+  const gravyOptionsDiv = document.getElementById("gravyOptions");
+  gravyOptionsDiv.innerHTML = "";
+  const gravies = items.filter(i => i.type === "gravy");
+  if (gravies.length) gravyOptionsDiv.innerHTML += `<strong>Gravy Options (Choose 1)</strong>`;
+  gravies.forEach(i => {
+    gravyOptionsDiv.innerHTML += `<label><input type="radio" name="gravy" value="${i.name}" data-price="${i.price}"><span>${i.name} (+₹${i.price})</span></label>`;
+  });
+
+  // Step 2.2: Topping
+  const toppingOptionsDiv = document.getElementById("toppingOptions");
+  toppingOptionsDiv.innerHTML = "";
+  const toppings = items.filter(i => i.type === "topping");
+  if (toppings.length) toppingOptionsDiv.innerHTML += `<strong>Topping Options (Choose 1)</strong>`;
+  toppings.forEach(i => {
+    toppingOptionsDiv.innerHTML += `<label><input type="radio" name="topping" value="${i.name}" data-price="${i.price}"><span>${i.name} (+₹${i.price})</span></label>`;
+  });
+
+  // Step 3: Extras
+  const extraOptionsDiv = document.getElementById("extraOptions");
+  extraOptionsDiv.innerHTML = "";
+  const extras = items.filter(i => i.type === "extra");
+  if (extras.length) extraOptionsDiv.innerHTML += `<strong>Extras</strong>`;
+  extras.forEach(i => {
+    extraOptionsDiv.innerHTML += `<label><input type="radio" name="extra" value="${i.name}" data-price="${i.price}"><span>${i.name} (+₹${i.price})</span></label>`;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", loadWokBuilderOptions);
+</script>
+
+  
+</body>
+</html>

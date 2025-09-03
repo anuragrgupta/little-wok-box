@@ -1,0 +1,166 @@
+<!-- /public/admin/menu.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Management - Admin</title>
+  <link rel="stylesheet" href="style-redesign.css">
+  <script type="module" src="menu.js" defer></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="main-navbar">
+    <ul>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/menu.html" class="active">Menu</a></li>
+      <li><a href="/offers.html">Offers</a></li>
+      <li><a href="/admin/dashboard.html">Dashboard</a></li>
+      <li><a href="/admin/menu.html">Admin Menu</a></li>
+      <li><a href="/admin/users.html">Users</a></li>
+    </ul>
+  </nav>
+  <div class="admin-wrapper">
+  <!-- Sidebar removed for full-width layout -->
+    <main class="admin-content">
+      <section class="form-section">
+        <div class="form-card">
+          <h2>Add Menu Item</h2>
+          <form id="menuForm">
+            <div class="form-row">
+              <input type="text" id="name" placeholder="Item Name" required />
+              <input type="text" id="description" placeholder="Description" required />
+            </div>
+            <div class="form-row">
+              <input type="number" id="price" placeholder="Price" required />
+              <input type="url" id="imageUrl" placeholder="Image URL" required />
+            </div>
+            <div class="form-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="isAvailable" checked /> Available
+              </label>
+              <select id="category">
+                <option value="main-course">Main Course</option>
+                <option value="tibetan">Tibetan Secrets</option>
+                <option value="soups">Soups</option>
+                <option value="beverages">Beverages</option>
+                <option value="momos">Momos Corner</option>
+                <option value="starters">Starters</option>
+                <option value="desserts">Desserts</option>
+              </select>
+            </div>
+            <div class="form-row type-row">
+              <label><input type="radio" name="type" value="veg" required> 🌱 Veg</label>
+              <label><input type="radio" name="type" value="egg"> 🥚 Egg</label>
+              <label><input type="radio" name="type" value="non-veg"> 🍗 Non-Veg</label>
+            </div>
+            <div class="form-row tags-row">
+              <label><input type="checkbox" value="for-one" class="tag"> 👤 For One</label>
+              <label><input type="checkbox" value="for-two" class="tag"> 👨‍👩‍👧‍👦 For Two</label>
+              <label><input type="checkbox" value="fried" class="tag"> 🥟 Fried</label>
+              <label><input type="checkbox" value="quick" class="tag"> ⏱️ Quick</label>
+              <label><input type="checkbox" value="time-taking" class="tag"> 🕒 Time Taking</label>
+              <label><input type="checkbox" value="spicy" class="tag"> 🌶️ Spicy</label>
+              <label><input type="checkbox" value="normal-spicy" class="tag"> 🌿 Normal Spicy</label>
+            </div>
+            <button type="submit" class="add-btn">Add Menu Item</button>
+          </form>
+        </div>
+      </section>
+      <section class="menu-list-section">
+        <h2>All Menu Items</h2>
+        <div id="menuGrid" class="menu-grid"></div>
+      </section>
+
+      <!-- Wok Builder Admin Section -->
+      <!-- Edit Wok Builder Modal -->
+      <div class="modal" id="editWokModal">
+        <div class="modal-content">
+          <button class="modal-close" id="closeEditWokModal" aria-label="Close">&times;</button>
+          <h3>Edit Wok Builder Item</h3>
+          <form id="editWokForm">
+            <div class="form-row">
+              <label>Item Name</label>
+              <input type="text" id="editWokName" required />
+            </div>
+            <div class="form-row">
+              <label>Price</label>
+              <input type="number" id="editWokPrice" required />
+            </div>
+            <div class="form-row">
+              <label>Type</label>
+              <select id="editWokType" required>
+                <option value="base">Base</option>
+                <option value="gravy">Gravy</option>
+                <option value="topping">Topping</option>
+                <option value="extra">Extra</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>Category</label>
+              <select id="editWokCategory">
+                <option value="">--Category--</option>
+                <option value="noodles">Noodles</option>
+                <option value="rice">Rice</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>Description</label>
+              <input type="text" id="editWokDescription" />
+            </div>
+            <button type="submit" class="add-btn">Save Changes</button>
+          </form>
+        </div>
+      </div>
+      <section class="wok-builder-section">
+        <div class="form-card">
+          <h2>Wok Builder Items</h2>
+          <form id="wokBuilderForm">
+            <div class="form-row">
+              <input type="text" id="wokName" placeholder="Item Name" required />
+              <input type="number" id="wokPrice" placeholder="Price" required />
+            </div>
+            <div class="form-row">
+              <select id="wokType" required>
+                <option value="base">Base</option>
+                <option value="gravy">Gravy</option>
+                <option value="topping">Topping</option>
+                <option value="extra">Extra</option>
+              </select>
+              <select id="wokCategory">
+                <option value="">--Category (for Base)--</option>
+                <option value="noodles">Noodles</option>
+                <option value="rice">Rice</option>
+              </select>
+              <input type="text" id="wokDescription" placeholder="Description" />
+            </div>
+            <button type="submit" class="add-btn">Add Wok Builder Item</button>
+          </form>
+        </div>
+        <div class="form-card" style="margin-top:2rem;">
+          <h2>All Wok Builder Items Added</h2>
+          <div id="wokBuilderGridBase" class="wok-grid-section">
+            <h3 class="wok-section-title">Step 1: Base</h3>
+            <div class="wok-grid" id="wokGridBase"></div>
+          </div>
+          <div id="wokBuilderGridGravy" class="wok-grid-section">
+            <h3 class="wok-section-title">Step 2: Gravy</h3>
+            <div class="wok-grid" id="wokGridGravy"></div>
+          </div>
+          <div id="wokBuilderGridTopping" class="wok-grid-section">
+            <h3 class="wok-section-title">Step 2: Topping</h3>
+            <div class="wok-grid" id="wokGridTopping"></div>
+          </div>
+          <div id="wokBuilderGridExtra" class="wok-grid-section">
+            <h3 class="wok-section-title">Step 3: Extra</h3>
+            <div class="wok-grid" id="wokGridExtra"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <!-- Footer -->
+  <footer class="main-footer">
+    <p>&copy; 2024 Little Wok Box. All rights reserved.</p>
+  </footer>
+</body>
+</html>

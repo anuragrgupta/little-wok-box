@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Little Wok Box</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/style-redesign.css">
+    <link rel="stylesheet" href="../profile-modal.css">
+  <style>
+    .modal-content {
+      background: #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 4px 32px #DC0E2A22;
+      padding: 32px 24px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+    .profile-fields .form-row {
+      margin-bottom: 1.1rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .profile-fields label {
+      color: #DC0E2A;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+    }
+    .profile-fields input, .profile-fields select {
+      border: 1.5px solid #DC0E2A;
+      background: #fff;
+      color: #222;
+      border-radius: 0.7rem;
+      font-size: 1rem;
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.3rem;
+      transition: border 0.2s;
+    }
+    .profile-fields input:focus, .profile-fields select:focus {
+      border: 2px solid #DC0E2A;
+      outline: none;
+      box-shadow: 0 0 0 2px #DC0E2A22;
+    }
+    .profile-fields .date-fields select {
+      width: 90px;
+      margin-right: 6px;
+    }
+    .profile-fields .form-row:last-child {
+      margin-bottom: 0;
+    }
+    .profile-modal-bg input:focus, .profile-modal-bg select:focus {
+      border: 1.5px solid #DC0E2A !important;
+      outline: none;
+      box-shadow: 0 0 0 2px #DC0E2A22;
+    }
+    .profile-modal-bg input, .profile-modal-bg select {
+      border: 1px solid #DC0E2A !important;
+      background: #fff;
+      color: #222;
+      border-radius: 0.7rem;
+      font-size: 1rem;
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.3rem;
+      transition: border 0.2s;
+    }
+    .profile-modal-bg label {
+      color: #B8002A;
+    }
+    .profile-modal-bg .step-points {
+      color: #DC0E2A;
+    }
+    body {
+      background: #f7f7fa;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .register-wrapper {
+      max-width: 420px;
+      margin: 3rem auto;
+      background: #fff;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 16px rgba(220,14,42,0.08);
+      padding: 2.5rem 2rem 2rem 2rem;
+    }
+    .register-title {
+      text-align: center;
+      color: #DC0E2A;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .register-form .form-row {
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .register-form .date-fields {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .register-form .date-fields select {
+      padding: 0.7rem 1rem;
+      border-radius: 0.7rem;
+      border: 1px solid #eee;
+      font-size: 1rem;
+      background: #f7f7fa;
+      transition: border 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    .register-form .date-fields select:focus {
+      border: 1.5px solid #DC0E2A;
+      outline: none;
+    }
+    .register-form label {
+      font-size: 1rem;
+      color: #222;
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+    }
+    .register-form input {
+      padding: 0.7rem 1rem;
+      border-radius: 0.7rem;
+      border: 1px solid #eee;
+      font-size: 1rem;
+      background: #f7f7fa;
+      transition: border 0.2s;
+    }
+    .register-form input:focus {
+      border: 1.5px solid #DC0E2A;
+      outline: none;
+    }
+    .register-form .register-btn {
+      background: #DC0E2A;
+      color: #fff;
+      border: none;
+      border-radius: 0.7rem;
+      padding: 0.9rem 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1.2rem;
+      transition: background 0.2s;
+    }
+    .register-form .register-btn:hover {
+      background: #a00;
+    }
+    .register-form .login-link {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.98rem;
+    }
+    .register-form .login-link a {
+      color: #DC0E2A;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <nav class="main-navbar">
+    <ul>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/menu.html">Menu</a></li>
+      <li><a href="/offers.html">Offers</a></li>
+      <li><a href="/account.html">Account</a></li>
+      <li><a href="/login.html">Login</a></li>
+    </ul>
+  </nav>
+  <div class="register-wrapper">
+      <!-- Registration Card Section -->
+      <div id="profileModal" class="modal" style="display:block;position:relative;background:none;box-shadow:none;align-items:stretch;justify-content:stretch;">
+        <form class="modal-content" id="registerCard" style="background:#fff;border-radius:1.2rem;box-shadow:0 4px 32px #DC0E2A22;padding:32px 24px;max-width:440px;margin:0 auto;">
+          <div class="profile-modal-badge" style="margin-bottom:18px;">
+            <span class="badge-icon" style="font-size:2rem;color:#DC0E2A;">🎯</span>
+            <span class="badge-label" id="profileBadgeLabel" style="color:#DC0E2A;font-size:1.2rem;font-weight:600;">Register & Earn Points</span>
+          </div>
+          <div class="profile-progress-bar-bg" style="background:#DC0E2A22;">
+            <div class="profile-progress-bar-fill" id="profileProgressBar" style="width: 0%;background:linear-gradient(90deg,#DC0E2A 60%,#fff 100%);color:#fff;">
+              <span class="progress-emoji" id="progressEmoji">🔥</span>
+            </div>
+          </div>
+          <div class="profile-points-summary" style="color:#DC0E2A;font-weight:600;margin-bottom:10px;">
+            Total Points: <span id="profilePoints">0</span>
+            <span class="profile-points-anim" id="profilePointsAnim"></span>
+          </div>
+          <div class="profile-fields">
+            <div class="form-row">
+              <label for="profileName">Full Name</label>
+              <input type="text" id="profileName" placeholder="Enter your name" autocomplete="name" required />
+            </div>
+            <div class="form-row">
+              <label for="profileContact">Contact Number</label>
+              <input type="tel" id="profileContact" placeholder="Enter your contact number" maxlength="10" pattern="^[0-9]{10}$" required />
+            </div>
+            <div class="form-row">
+              <label for="profileWhatsapp">WhatsApp Number</label>
+              <input type="tel" id="profileWhatsapp" placeholder="Enter your WhatsApp number" maxlength="10" pattern="^[0-9]{10}$" required />
+              <div style="margin-top:6px;">
+                <input type="checkbox" id="useContactAsWhatsapp" style="margin-right:6px;">
+                <label for="useContactAsWhatsapp" style="font-size:0.98rem;">Use contact number as WhatsApp number</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="profileEmail">Email Address</label>
+              <input type="email" id="profileEmail" placeholder="Enter your email" autocomplete="email" required />
+            </div>
+            <div class="form-row">
+              <label for="profileDOB">Date of Birth</label>
+              <div class="date-fields">
+                <select id="profileDOBDay" style="width:70px;">
+                  <option value="">DD</option>
+                  <script>for(let i=1;i<=31;i++)document.write(`<option value='${i}'>${i.toString().padStart(2,'0')}</option>`);</script>
+                </select>
+                <select id="profileDOBMonth" style="width:90px;">
+                  <option value="">MM</option>
+                  <option value="01">Jan</option>
+                  <option value="02">Feb</option>
+                  <option value="03">Mar</option>
+                  <option value="04">Apr</option>
+                  <option value="05">May</option>
+                  <option value="06">Jun</option>
+                  <option value="07">Jul</option>
+                  <option value="08">Aug</option>
+                  <option value="09">Sep</option>
+                  <option value="10">Oct</option>
+                  <option value="11">Nov</option>
+                  <option value="12">Dec</option>
+                </select>
+                <select id="profileDOBYear" style="width:90px;">
+                  <option value="">YYYY</option>
+                  <script>for(let y=2015;y>=1950;y--)document.write(`<option value='${y}'>${y}</option>`);</script>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="profileUsername">Username</label>
+              <input type="text" id="profileUsername" placeholder="Choose a username" autocomplete="username" required />
+            </div>
+            <div class="form-row">
+              <label for="profilePassword">Password</label>
+              <input type="password" id="profilePassword" placeholder="Create a password (e.g. wok@1234, WokBox!2025)" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-=]{8,}$" title="Password must be at least 8 characters, contain letters, numbers, and can include special characters." autocomplete="new-password" required />
+            </div>
+            <div class="form-row">
+              <label>Food Preferences</label>
+              <div id="foodPrefChips" class="food-pref-chips"></div>
+            </div>
+            <div class="form-row">
+              <label for="profileGender">Gender</label>
+              <select id="profileGender" required>
+                <option value="">Select</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="other">Other</option>
+                <option value="prefer_not_say">Prefer not to say</option>
+              </select>
+            </div>
+          </div>
+          <div class="profile-progress-label" id="profileProgressLabel" style="color:#DC0E2A;text-align:center;font-size:1rem;margin:10px 0;">0/8 steps completed</div>
+          <button class="btn" id="registerEarnBtn" type="submit" style="display:block;margin:18px auto 0 auto;background:#DC0E2A;color:#fff;border:none;border-radius:8px;padding:12px 32px;font-size:1.1rem;font-weight:600;box-shadow:0 2px 8px #DC0E2A22;transition:background 0.2s;">Register & Earn Points</button>
+          <div id="profileConfetti"></div>
+        </form>
+      </div>
+      <!-- End Profile Completion Progress Section -->
+      <div class="register-title">Create Your Account</div>
+      <form class="register-form" id="registerForm">
+  <div class="login-link">Already have an account? <a href="login.html">Login here</a></div>
+    </form>
+  </div>
+  <footer class="main-footer">
+    <p>&copy; 2025 Little Wok Box. All rights reserved.</p>
+  </footer>
+    <script src="../profile-modal.js"></script>
+  <script type="module" src="public/js/register.js"></script>
+</body>
+</html>

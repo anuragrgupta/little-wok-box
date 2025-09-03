@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Account | Little Wok Box</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/style-redesign.css">
+  <link rel="stylesheet" href="profile-modal.css">
+  <style>
+    .coupon-flip {
+      perspective: 800px;
+      display: inline-block;
+      margin: 0.5rem auto;
+    }
+    .coupon-flip-inner {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 16px rgba(220,14,42,0.12);
+      background: #FDE4E4;
+      border: 1.5px solid #e2bfc2;
+      margin: 0 auto;
+    }
+    .coupon-flip.flipped .coupon-flip-inner {
+      transform: rotateY(180deg);
+    }
+    .coupon-flip-front, .coupon-flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #DC0E2A;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 8px rgba(220,14,42,0.08);
+      background: #FDE4E4;
+      padding: 1 rem 0.5rem;
+    }
+    .coupon-flip-front {
+      gap: 0.7rem;
+      background: linear-gradient(135deg, #FDE4E4 70%, #fffbe6 100%);
+      color: #B8002A;
+    }
+    .coupon-flip-back {
+      transform: rotateY(180deg);
+      background: #fff;
+      color: #222;
+  gap: 0.5rem;
+  padding: 0.3rem 0.2rem;
+  justify-content: flex-start;
+  align-items: center;
+    }
+    .coupon-flip-back .coupon-code {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #DC0E2A;
+  margin-bottom: 0.1rem;
+  letter-spacing: 2px;
+    }
+    .coupon-flip-back img {
+  width: 150px;
+  height: 150px;
+  display: block;
+  margin: -10px auto 0 auto;
+  box-sizing: border-box;
+    }
+    body { background: #f7f7fa; font-family: 'Inter', Arial, sans-serif; }
+    .account-wrapper { max-width: 520px; margin: 3rem auto; background: #fff; border-radius: 1.2rem; box-shadow: 0 2px 16px rgba(220,14,42,0.08); padding: 2.5rem 2rem; }
+    .account-card h2 { color: #DC0E2A; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+    .account-info { margin-bottom: 1.5rem; }
+    .account-info div { margin-bottom: 0.5rem; font-size: 1.05rem; }
+    .points-section { background: #f7f7fa; border-radius: 0.7rem; padding: 1rem; margin-bottom: 1.2rem; text-align: center; }
+    .points-label { color: #222; font-weight: 600; }
+    .points-value { color: #DC0E2A; font-size: 1.3rem; font-weight: 700; }
+    .coupon-section { background: #fffbe6; border-radius: 0.7rem; padding: 1rem; text-align: center; margin-bottom: 1.2rem; display: none; }
+    .coupon-label { color: #a00; font-weight: 600; }
+    .coupon-code { font-size: 1.2rem; font-weight: 700; color: #DC0E2A; letter-spacing: 2px; }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <nav class="main-navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="offers.html">Offers</a></li>
+      <li><a href="account.html" class="active">Account</a></li>
+      <li><a href="#" id="logoutBtn">Logout</a></li>
+    </ul>
+  </nav>
+  <div class="account-wrapper">
+    <div id="user-details"></div>
+    <div class="points-section">
+      <span class="points-label">Total Points:</span>
+      <span class="points-value" id="user-points">0</span>
+    </div>
+      <div class="coupon-section" id="coupon-section" style="display:none;">
+    <span class="coupon-label" style="display:block;text-align:center;margin-bottom:0.5rem;">Available Coupon:</span>
+    <div class="coupon-flip" id="coupon-flip" style="display:flex;justify-content:center;">
+          <div class="coupon-flip-inner">
+            <div class="coupon-flip-front">
+              <span class="coupon-code" id="coupon-code" style="cursor:pointer;text-decoration:underline;font-size:1.5rem;letter-spacing:2px;">-</span>
+              <span style="font-size:1rem;color:#444;margin-top:0.5rem;">(Click to see QR)</span>
+            </div>
+            <div class="coupon-flip-back" id="coupon-qr">
+              <span class="coupon-code" id="coupon-code-back" style="font-size:1.5rem;letter-spacing:2px;">-</span>
+              <div id="coupon-qr-img"></div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:0.95rem;color:#222;margin-top:0.5rem;">Use this code to get ₹50 off on your next order!</div>
+    </div>
+    <button type="button" id="makeAdminBtn" style="background:#fff;color:#DC0E2A;border:1.5px solid #DC0E2A;margin-bottom:1rem;font-size:1rem;font-weight:600;border-radius:0.7rem;padding:0.7rem 1.2rem;cursor:pointer;display:block;width:100%;">Make Me Admin</button>
+  <!-- Profile completion modal removed for migration to register page -->
+    
+  </div>
+  <footer class="main-footer">
+    <p>&copy; 2025 Little Wok Box. All rights reserved.</p>
+  </footer>
+  <script type="module" src="js/account.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const flip = document.getElementById('coupon-flip');
+      const codeFront = document.getElementById('coupon-code');
+      const codeBack = document.getElementById('coupon-code-back');
+      const qrImgDiv = document.getElementById('coupon-qr-img');
+      if (flip && codeFront && codeBack && qrImgDiv) {
+        flip.addEventListener('click', function() {
+          flip.classList.toggle('flipped');
+          if (flip.classList.contains('flipped')) {
+            // Show code and QR on back
+            codeBack.textContent = codeFront.textContent;
+            qrImgDiv.innerHTML = '';
+            const qr = new QRious({
+              value: codeFront.textContent,
+              size: 90
+            });
+            const img = document.createElement('img');
+            img.src = qr.toDataURL();
+            img.alt = 'QR Code';
+            qrImgDiv.appendChild(img);
+          }
+        });
+      }
+    });
+  </script>
+
+  <script type="module">
+    import { setDoc, doc, getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { auth } from "./js/firebase-config.js";
+    document.getElementById('makeAdminBtn').onclick = async function() {
+      if (!auth.currentUser) {
+        alert("Please log in first.");
+        return;
+      }
+      const db = getFirestore();
+      const user = auth.currentUser;
+      const adminData = {
+        uid: user.uid,
+        email: user.email,
+        role: "admin",
+        createdAt: new Date().toISOString()
+      };
+      await setDoc(doc(db, "users", user.uid), adminData, { merge: true });
+      alert("Your account is now set as admin in Firestore.");
+    };
+  </script>
+
+  <script src="profile-modal.js"></script>
+</body>
+</html>
