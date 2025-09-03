@@ -110,3 +110,13 @@ window.setCurrentUserAsAdmin = async function() {
   await setDoc(doc(db, "users", user.uid), adminData, { merge: true });
   alert("Your account is now set as admin in Firestore.");
 };
+
+// Hide register link on login page if user is already logged in
+document.addEventListener("DOMContentLoaded", () => {
+  onAuthStateChanged(auth, (user) => {
+    const registerLink = document.querySelector('.login-link a[href="register.html"]');
+    if (user && registerLink) {
+      registerLink.style.display = 'none';
+    }
+  });
+});
