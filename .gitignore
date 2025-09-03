@@ -69,3 +69,5 @@ node_modules/
 .dataconnect
 scripts/serviceAccountKey.json
 scripts/serviceAccountKey.json
+scripts/serviceAccountKey.json
+.env
